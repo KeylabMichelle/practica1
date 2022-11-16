@@ -1,70 +1,86 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'dart:collection';
+
+import 'package:firebase_auth/firebase_auth.dart';
 
 part 'save_event.dart';
 part 'save_state.dart';
 
 class SaveBloc extends Bloc<SaveEvent, SaveState> {
+  List lista = [];
   SaveBloc() : super(SaveInitial()) {
     on<SaveEvent>(addSong);
   }
 
   Future<dynamic> addSong(event, emit) async {
-    List list = state.favorites;
+    Map list = event.saved;
+
+    print(list);
 
     if (!isSaved(event, emit)) {
       print('event ${event.saved[0]}');
       print('Not saved');
 
-      list.add({
-        'song_name' : event.saved[0],
-        'album' :  event.saved[1],
-        'cover' :  event.saved[2],
-        'artist' :  event.saved[3],
-        'release_date' :  event.saved[4],
-        'apple_music' :  event.saved[5],
-        'links' :  event.saved[6],
-        'spotify' :  event.saved[7],
-      });emit(SavingSong(favorites: list));
+      lista.add(list);
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({'favorites': lista});
+      emit(SavingSong(favorites: list));
 
-      print(list);
+      print('Canción agregada, lista actualizada: $lista');
     } else {
       popSong(event, emit);
-      print('popped: $list');
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({'favorites': lista});
+      emit(DeletingSong(favorites: list));
+      print('Lista after pop: $lista');
     }
   }
 
   Future popSong(event, emit) async {
-    List list = state.favorites;
     if (isSaved(event, emit)) {
-      list.removeWhere((e) =>
-          e['song_name'] == event.saved[0] &&
-          e['album'] == event.saved[1] &&
-          e['cover'] == event.saved[2] &&
-          e['artist'] == event.saved[3] &&
-          e['release_date'] == event.saved[4] &&
-          e['apple_music'] == event.saved[5] &&
-          e['links'] == event.saved[6] &&
-          e['spotify'] == event.saved[7]);
-      emit(DeletingSong(favorites: list));
+      lista.removeWhere((e) =>
+          e['song_name'] == event.saved['song_name'] &&
+          e['album'] == event.saved['album'] &&
+          e['cover'] == event.saved['cover'] &&
+          e['artist'] == event.saved['artist'] &&
+          e['release_date'] == event.saved['release_date'] &&
+          e['apple_music'] == event.saved['apple_music'] &&
+          e['links'] == event.saved['links'] &&
+          e['spotify'] == event.saved['spotify']);
+      emit(DeletingSong(favorites: lista));
     }
   }
 
   bool isSaved(event, emit) {
-    List list = state.favorites;
+    bool isInFavorites = lista.any((e) =>
+        e['song_name'] == event.saved['song_name'] &&
+        e['album'] == event.saved['album'] &&
+        e['cover'] == event.saved['cover'] &&
+        e['artist'] == event.saved['artist'] &&
+        e['release_date'] == event.saved['release_date'] &&
+        e['apple_music'] == event.saved['apple_music'] &&
+        e['links'] == event.saved['links'] &&
+        e['spotify'] == event.saved['spotify']);
 
-    bool isInFavorites = list.any((e) =>
-        e['song_name'] == event.saved[0] &&
-        e['album'] == event.saved[1] &&
-        e['cover'] == event.saved[2] &&
-        e['artist'] == event.saved[3] &&
-        e['release_date'] == event.saved[4] &&
-        e['apple_music'] == event.saved[5] &&
-        e['links'] == event.saved[6] &&
-        e['spotify'] == event.saved[7]);
+    print(isInFavorites);
     return isInFavorites;
+  }
+
+  Future<void> pullFavorites() async {
+    final user = FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid);
+    final favorites = await user.get();
+    if (favorites.exists && favorites.data()!['favorites'] != null) {
+      lista = favorites.data()!['favorites'];
+    } else {
+      lista = [];
+    }
   }
 }

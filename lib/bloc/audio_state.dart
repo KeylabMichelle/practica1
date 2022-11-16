@@ -4,7 +4,6 @@ abstract class AudioState extends Equatable {
   const AudioState();
 
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 
@@ -31,15 +30,6 @@ class AudioReceivedSuccessState extends AudioState {
       required this.links,
       required this.applemusic,
       required this.release_date});
-
-
 }
 
-class AudioReceivedErrorState extends AudioState {
-  final String error;
-
-  AudioReceivedErrorState({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
+class AudioReceivedErrorState extends AudioState {}

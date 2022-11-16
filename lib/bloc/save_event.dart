@@ -1,15 +1,12 @@
 part of 'save_bloc.dart';
 
-abstract class SaveEvent extends Equatable {
-  const SaveEvent();
+ class SaveEvent extends Equatable {
+ 
 
+  final Map saved;
+  SaveEvent(this.saved);
   @override
   List<Object> get props => [];
 }
 
-
-class saveSong extends SaveEvent {
-  List<dynamic> saved;
-  saveSong(this.saved);
-}
 

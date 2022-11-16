@@ -1,12 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practica1/preview.dart';
 import 'package:practica1/recording.dart';
 import 'package:practica1/saved_songs.dart';
+import 'package:practica1/sign_in.dart';
 import 'bloc/audio_bloc.dart';
 import 'bloc/save_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(
@@ -29,19 +33,12 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.purple,
       ),
-      initialRoute: "/recording",
+      initialRoute: "sign_in",
       routes: {
-        "/recording": (context) => Recording(),
-        "/preview": (context) => Preview(
-            song_link: '',
-            song_name: '',
-            cover: '',
-            release_date: '',
-            album: '',
-            apple_music: '',
-            spotify: '',
-            artist: ''),
-        "/saved_songs": (context) => SavedSongs()
+        "recording": (context) => Recording(),
+        "preview": (context) => Preview(),
+        "saved_songs": (context) => SavedSongs(),
+        "sign_in": (context) => SignIn(),
       },
     );
   }

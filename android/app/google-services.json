@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "542579527140",
+    "project_id": "musicfinder-5db79",
+    "storage_bucket": "musicfinder-5db79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542579527140:android:ae2d3a87608c56b4280bf1",
+        "android_client_info": {
+          "package_name": "com.example.practica1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542579527140-7p69f9tn1nrkj5fp8j4vpepp6dmirgmb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.practica1",
+            "certificate_hash": "b3f8bbd0154b1e3c0bb3e0f1285192f9a2a12f5d"
+          }
+        },
+        {
+          "client_id": "542579527140-5dk9ffcd32drv7a51u9cmm2p6nm6b0j2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYvwMEAbUz_SsEBfyjIou00dlajP8MPCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542579527140-5dk9ffcd32drv7a51u9cmm2p6nm6b0j2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "542579527140-dsi44kl5rsp5g6lm2d34itvebb965m5g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.practica1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

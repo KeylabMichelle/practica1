@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>542579527140-dsi44kl5rsp5g6lm2d34itvebb965m5g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.542579527140-dsi44kl5rsp5g6lm2d34itvebb965m5g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAYlRIWm0Rcrp4B_sOchDnLiyCOvY6h6dY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>542579527140</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.practica1</string>
+	<key>PROJECT_ID</key>
+	<string>musicfinder-5db79</string>
+	<key>STORAGE_BUCKET</key>
+	<string>musicfinder-5db79.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:542579527140:ios:5e2fa4ef503a8e2c280bf1</string>
+</dict>
+</plist>

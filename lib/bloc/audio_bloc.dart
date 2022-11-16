@@ -30,15 +30,15 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
       final String song_name = apiRes['result']['title'];
       final String album = apiRes['result']['album'];
       final String artist = apiRes['result']['artist'];
-      final String cover = apiRes['result']['spotify']['album']['images'][0]['url'];
-      final String spotify = apiRes['result']['spotify']['external_urls']['spotify'];
+      final String cover =
+          apiRes['result']['spotify']['album']['images'][0]['url'];
+      final String spotify =
+          apiRes['result']['spotify']['external_urls']['spotify'];
       final String links = apiRes['result']['song_link'];
       final String applemusic = apiRes['result']['apple_music']['url'];
       final String release_date = apiRes['result']['release_date'];
 
-
-      emit(
-        AudioReceivedSuccessState(
+      emit(AudioReceivedSuccessState(
           song_name: song_name,
           album: album,
           artist: artist,
@@ -46,10 +46,10 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
           spotify: spotify,
           links: links,
           applemusic: applemusic,
-          release_date: release_date)
-          );
-      
-    } catch (e) {}
+          release_date: release_date));
+    } catch (e) {
+      emit(AudioReceivedErrorState());
+    }
   }
 
   Future<String?> recording(String path, Emitter<dynamic> emit) async {
@@ -69,7 +69,7 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
         return await audioFile.stop();
       }
     } catch (error) {
-      emit(AudioReceivedErrorState(error: error.toString()));
+      emit(AudioReceivedErrorState());
       print('error');
     }
   }
@@ -82,7 +82,7 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
       },
       body: jsonEncode(
         <String, dynamic>{
-          'api_token': '1130b08b718b5e3d922f1f93b2929680',
+          'api_token': '25adafcd04a5b9b7e576dcb300364565',
           'return': 'spotify,apple_music',
           'audio': audio,
           'method': 'recognize',
